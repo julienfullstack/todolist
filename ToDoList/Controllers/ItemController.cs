@@ -28,11 +28,17 @@ namespace ToDoList.Controllers
     }
 
        [HttpPost("/items/delete")]
-    public ActionResult DeleteAll()
-    {
-      Item.ClearAll();
-      return View();
-    }
+    
+      [HttpGet("/items/new")]
+      public ActionResult New()
+      {
+        return View();
+      }
+      public ActionResult DeleteAll()
+      {
+        Item.ClearAll();
+        return View();
+      }
 
   }
 }
