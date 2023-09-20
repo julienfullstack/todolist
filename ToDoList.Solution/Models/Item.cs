@@ -31,3 +31,11 @@ namespace ToDoList.Models
         }
     }
 }
+
+public class Wordle {
+   public string Word { get; set; }
+    public int Id { get; }
+    private static List<Wordle> _instances = new List<Wordle> { };
+
+
+}
