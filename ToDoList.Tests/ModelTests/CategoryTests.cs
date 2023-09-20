@@ -29,6 +29,17 @@ namespace ToDoList.Tests
     //Assert
     Assert.AreEqual(name, result);
   }
-  
+
+namespace ToDoList.Tests
+{
+  [TestClass]
+  public class CategoryTests : IDisposable
+  {
+
+    public void Dispose()
+    {
+      Category.ClearAll();
+    }
+
   }
 }
