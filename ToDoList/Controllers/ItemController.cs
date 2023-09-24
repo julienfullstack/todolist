@@ -37,5 +37,12 @@ namespace ToDoList.Controllers
     return View(model);
   }
 
+  [HttpGet("/categories/{categoryId}/items/new")]
+  public ActionResult New(int categoryId)
+  {
+     Category category = Category.Find(categoryId);
+     return View(category);
+  }
+
   }
 }
