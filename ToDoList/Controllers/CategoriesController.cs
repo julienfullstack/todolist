@@ -15,5 +15,19 @@ namespace ToDoList.Controllers
       return View(allCategories);
     }
 
+      
+    [HttpGet("/categories/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
+
+    [HttpPost("/categories")]
+    public ActionResult Create(string categoryName)
+    {
+      Category newCategory = new Category(categoryName);
+      return RedirectToAction("Index");
+    }
+
   }
 }
