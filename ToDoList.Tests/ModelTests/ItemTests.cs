@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using ToDoList.Models;
 using System;
 
@@ -8,10 +9,19 @@ namespace ToDoList.Tests
   [TestClass]
   public class ItemTests : IDisposable
   {
-
+    
+    public IConfiguration Configuration { get; set; }
     public void Dispose()
     {
       Item.ClearAll();
+    }
+
+    public ItemTests()
+    {
+      IConfigurationBuilder builder = new ConfigurationBuilder()
+          .AddJsonFile("appsettings.json");
+      Configuration = builder.Build();
+      DBConfiguration.ConnectionString = Configuration["ConnectionStrings:TestConnection"];
     }
 
     [TestMethod]
@@ -111,7 +121,28 @@ namespace ToDoList.Tests
     //Assert
     Assert.AreEqual(newItem2, result);
   }
-  
+
+  [TestMethod]
+  public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Item()
+  {
+    // Arrange, Act
+    Item firstItem = new Item("Mow the lawn");
+    Item secondItem = new Item("Mow the lawn");
+
+    // Assert
+    Assert.AreEqual(firstItem, secondItem);
+  }
+
+    [TestMethod]
+    public void ValueTypes_ReturnsTrueBecauseValuesAreTheSame_Bool()
+    {
+      // Arrange, Act
+      int test1 = 1;
+      int test2 = 1;
+
+      // Assert
+      Assert.AreEqual(test1, test2);
+    }
   }
 
   
